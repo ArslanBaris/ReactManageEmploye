@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 // Components
@@ -22,13 +22,8 @@ const EmployeeList = () => {
        handleClose();
     }, [employees])
 
-    const myRef = useRef(null);
+ 
 
-    const onButtonClick = () => {
-      console.log(myRef.current);
-      myRef.current.focus();
-  }
-  
     return (
         <>
 
@@ -63,7 +58,13 @@ const EmployeeList = () => {
             </tr>
         </thead>
         <tbody>
-            <Employee employees={employees}/>
+        {
+                    employees.map((employee) =>(
+                        <tr key={employee.id}>
+                            <Employee employee={employee} />
+                        </tr>
+                    ))
+                }
         </tbody>
     </table>
 
@@ -81,11 +82,7 @@ const EmployeeList = () => {
                     Close Modal
                 </Button>
             </Modal.Footer>
-        </Modal>
-
-        <input ref={myRef} type="text"></input>
-        <button onClick={onButtonClick}>Focus Input</button>
-
+        </Modal>     
     </>
     )
 }
