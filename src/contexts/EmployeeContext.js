@@ -25,6 +25,8 @@ const EmployeeContextProvider = (props) => {
         setEmployees(employees.map((employee) => (employee.id === id ? updatedEmployee : employee)))
     }
 
+    //const sortedEmployees = employees.sort((a,b) => (a.name < b.name ? -1 : 1 ));
+
     return (
         <EmployeeContext.Provider value = {{employees, addEmployee, deleteEmployee, updateEmployee}}>
             {props.children}
