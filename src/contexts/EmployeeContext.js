@@ -25,10 +25,18 @@ const EmployeeContextProvider = (props) => {
         setEmployees(employees.map((employee) => (employee.id === id ? updatedEmployee : employee)))
     }
 
+    const login = (userName, password) => {
+        employees.map( employee => ((employee.user.userName === userName || employee.user.password === password ) 
+        ? setEmployees(employees.filter(employee1=> employee1.name ===employee.name))  
+        : console.log("eror")))
+
+    }
+
+
     //const sortedEmployees = employees.sort((a,b) => (a.name < b.name ? -1 : 1 ));
 
     return (
-        <EmployeeContext.Provider value = {{employees, addEmployee, deleteEmployee, updateEmployee}}>
+        <EmployeeContext.Provider value = {{employees, addEmployee, deleteEmployee, updateEmployee,login}}>
             {props.children}
         </EmployeeContext.Provider>
     )
