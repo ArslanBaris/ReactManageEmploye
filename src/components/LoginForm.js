@@ -1,11 +1,15 @@
 import { Form, Button } from 'react-bootstrap';
 import { useContext, useState } from 'react';
 
+import Auth from './../Auth'
+
 // Context
 import { EmployeeContext } from '../contexts/EmployeeContext';
 
-const LoginForm = () => {    
+const LoginForm = (props) => {    
 
+    const { login } = useContext(EmployeeContext);
+    const {employees} = useContext(EmployeeContext)
     const [user, setUser] = useState({
         userName:"", password:""
     })
@@ -19,6 +23,12 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(user)
+        login(userName,password)
+        Auth.login(() => {
+            props.history.push("/home")
+        })
+        console.log(employees)
+        
     }
 
     return (
