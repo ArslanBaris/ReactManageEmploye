@@ -1,6 +1,8 @@
 import { useContext, useState, useEffect } from 'react';
 import { Button, Modal, Alert } from 'react-bootstrap';
 
+import Auth from '../Auth';
+
 // Components
 import Employee from './Employee';
 import AddForm from './AddForm';
@@ -9,7 +11,7 @@ import AddForm from './AddForm';
 import { EmployeeContext } from '../contexts/EmployeeContext';
 
 
-const EmployeeList = () => {
+const EmployeeList = (props) => {
 
     const {employees} = useContext(EmployeeContext)
 
@@ -48,6 +50,17 @@ const EmployeeList = () => {
                   </h2>
                 </div>
                 <div className="col-sm-6">
+                  <Button
+                   onClick={()=>{
+                     Auth.logout(()=>{
+                      props.history.push("/");
+                     })
+                   }}
+                  >
+                    <i class="material-icons logout">&#xe9ba;</i>{" "}
+                    <span>Logout</span>
+                  </Button>
+
                   <Button
                    onClick={handleShow}
                     className="btn btn-success text-white"
